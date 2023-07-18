@@ -1,24 +1,36 @@
-<h1 class="mt-5">Listado de Pokemones</h1>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button class="btn btn-secondary" (click)="previusPage()">Anteriores</button>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<button class="btn btn-secondary" (click)="nextPage()">Siguient</button>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th [ngStyle]="{'width': '100px' }">#</th>
-            <th [ngStyle]="{'width': '150px'}">Name</th>
-            <th>Sprite</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let poke of pokemons | filter:page" [ngStyle]="{'height': '100px' }">
-            <td>{{poke.id}}</td>
-            <td>{{poke.name}}</td>
-            <td>
-                <img [src]="poke.picture" [alt]="poke.name" [title]="poke.name" [ngStyle]="{'width':'75px' }" />
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+    <h1 class="mt-5">Listado de Pokemones</h1>
+    
+    <input type="text"
+     class="form-control mb-5 w-50" 
+     placeholder="Buscar Pokemon"
+     #txtSearch
+     (keyup)="onSearchPokemones(txtSearch.value)"
+      />
+    
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-secondary" (click)="previusPage()" >Anteriores</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-secondary" (click)="nextPage()"[disabled]="(pokemons | filter:page:search).length === 0">Siguient</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th [ngStyle]="{'width': '100px' }">#</th>
+                <th [ngStyle]="{'width': '150px'}">Name</th>
+                <th>Sprite</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let poke of pokemons | filter:page:search" [ngStyle]="{'height': '100px' }">
+                <td>{{poke.id}}</td>
+                <td>{{poke.name}}</td>
+                <td>
+                    <img [src]="poke.picture" [alt]="poke.name" [title]="poke.name" [ngStyle]="{'width':'75px' }" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

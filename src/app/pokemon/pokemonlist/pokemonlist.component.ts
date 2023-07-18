@@ -10,7 +10,8 @@ import { Pokemons } from '../interfaces/pokemon.interface';
 export class PokemonlistComponent implements OnInit {
 
   public pokemons: Pokemons[] = []
-  public page: number = 20
+  public page: number = 0
+  public search: string = ''
 
   constructor(
     private readonly pokemonService: PokemonService
@@ -26,6 +27,12 @@ export class PokemonlistComponent implements OnInit {
   previusPage() {
     if (this.page > 0)
       this.page -= 5
+  }
+
+
+  onSearchPokemones(search: string) {
+    this.page = 0
+    this.search = search
   }
 
 }
